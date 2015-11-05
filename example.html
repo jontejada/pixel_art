@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style type="text/css">
+  .cat {
+  	float: left;
+  }
+  </style>
+</head>
+<body>
+  <h1>hey</h1>
+
+  <div class="cat">
+  	<img src="http://placekitten.com/123/456">
+  </div>
+  <div class="cat">
+  	<img src="http://placekitten.com/123/456">
+  </div>
+  <div class="cat">
+  	<img src="http://placekitten.com/123/456">
+  </div>
+
+  <button id="counter"></button>
+
+  <script type="text/javascript">
+  	// find the button
+  	var btn = document.getElementById("counter");
+  	// initialize a counter variable
+	var counter = 0;
+
+	// attach an event listener
+  	btn.addEventListener("click", function(){
+	    counter++;
+	    btn.innerText = counter;
+	});
+
+  	btn.addEventListener("click", function(){
+	    alert("you clicked");
+	});
+
+  	//find the div
+  	var catDivList = document.getElementsByClassName("cat");
+
+  	for (var i = 0; i < catDivList.length; i++) {
+  		catDivList[i].addEventListener("click", function(event) {
+  			console.log("I'm running")
+	  		event.target.style.border = "1px solid blue";
+	  	});
+  	};
+  	
+
+
+
+
+
+  </script>
+</body>
+</html>
