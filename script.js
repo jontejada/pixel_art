@@ -28,10 +28,12 @@ var paperDivs = document.getElementsByClassName('paper');
 
 var paintbrush = '';
 
+var paint = function(event) {
+	event.target.style.backgroundColor = paintbrush;
+};
+
 for (var i = 0; i < paperDivs.length; i++) {
-	paperDivs[i].addEventListener('mouseover', function(event) { //mouseover or click
-		event.target.style.backgroundColor = paintbrush;
-	});
+	paperDivs[i].addEventListener('mouseover', paint);
 }
 
 makeBox('paint','white');
@@ -51,13 +53,14 @@ makeBox('paint','navy');
 makeBox('paint','fuchsia');
 makeBox('paint','purple');
 
-
 var pallet = document.getElementsByClassName('paint');
 
+var changePaintbrush = function(event) {
+	paintbrush = event.target.style.backgroundColor;
+};
+
 for (var i = 0; i < pallet.length; i++) {
-	pallet[i].addEventListener('mouseover', function(event) { //mouseover or click
-		paintbrush = event.target.style.backgroundColor;
-	});
+	pallet[i].addEventListener('mouseover', changePaintbrush);
 }
 
 
