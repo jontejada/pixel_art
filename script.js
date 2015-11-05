@@ -83,7 +83,7 @@ for (var i = 0; i < paperDivs.length; i++) {
 	paperDivs[i].addEventListener('dblclick', paintAll);
 }
 
-//
+//text bar
 var textBar = document.createElement('div');
 textBar.style.fontFamily = 'sans-serif';
 textBar.style.fontWeight = 'bold';
@@ -150,8 +150,7 @@ function doGrowUp() {
 			console.log("fell off the edge! " + err);
 		}
 	}
-}
-
+}	
 
 //fill button
 var fill = document.createElement('span');
@@ -167,3 +166,15 @@ function doFill() {
 		}
 	}
 }
+
+//rectangle maker
+var a = 2;
+var b = 26;
+var positions = [a,b];
+
+if (b>a) {
+
+}
+
+
+
