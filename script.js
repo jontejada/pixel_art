@@ -1,8 +1,10 @@
+//setup
 document.body.style.margin = '0px';
 var columns = 40;
 var boxSize = window.innerWidth / columns;
 var rows = Math.floor(window.innerHeight / boxSize) - 2;
 
+//create, style and append a new pixel (div)
 function makeBox (whatClass,whatColor) {
 	var box = document.createElement('div');
 	box.className = whatClass;
@@ -236,8 +238,7 @@ function doFill() {
 	}
 }
 
-//rectangle maker ONLY WORKS for topleft to bottomright (or reverse rectangles)
-
+//rectangle maker ONLY WORKS for topleft to bottomright (or reverse) rectangles
 var a;
 function startRect(event) {
 	a = event.target.indexValue;
