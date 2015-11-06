@@ -1,7 +1,7 @@
 document.body.style.margin = '0px';
-var boxSize = window.innerWidth / 40;
-var rows = Math.floor(window.innerHeight / boxSize) - 2;
 var columns = 40;
+var boxSize = window.innerWidth / columns;
+var rows = Math.floor(window.innerHeight / boxSize) - 2;
 
 function makeBox (whatClass,whatColor) {
 	var box = document.createElement('div');
@@ -29,6 +29,8 @@ var paint = function(event) {
 
 for (var i = 0; i < paperDivs.length; i++) {
 	paperDivs[i].addEventListener('mouseover', paint);
+	paperDivs[i].addEventListener('mousedown', startRect);
+	paperDivs[i].addEventListener('mouseup', endRect);
 }
 
 //building the color pallet
@@ -41,6 +43,7 @@ var colorList = [
 
 for (var i = 0; i < colorList.length; i++) {
 	makeBox('paint',colorList[i]);
+	//makeBox('paint',colorList[i]);
 }
 var pallet = document.getElementsByClassName('paint');
 
@@ -58,12 +61,12 @@ var paintArea = function(event) {
 	event.target.nextSibling.style.backgroundColor = paintbrush;
 	event.target.previousSibling.style.backgroundColor = paintbrush;
 	console.log(event.target.indexValue);
-	paperDivs[event.target.indexValue-41].style.backgroundColor = paintbrush;
-	paperDivs[event.target.indexValue-40].style.backgroundColor = paintbrush;
-	paperDivs[event.target.indexValue-39].style.backgroundColor = paintbrush;
-	paperDivs[event.target.indexValue+39].style.backgroundColor = paintbrush;
-	paperDivs[event.target.indexValue+40].style.backgroundColor = paintbrush;
-	paperDivs[event.target.indexValue+41].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue-columns+1].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue-columns].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue-columns-1].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue+columns-1].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue+columns].style.backgroundColor = paintbrush;
+	paperDivs[event.target.indexValue+columns+1].style.backgroundColor = paintbrush;
 
 };
 
@@ -90,7 +93,7 @@ textBar.style.fontWeight = 'bold';
 textBar.style.color = 'white';
 //textBar.style.padding = '10px';
 textBar.style.fontSize = "40px";
-textBar.innerHTML = 'ACTIONS: ';
+textBar.innerHTML = ' ';
 document.body.appendChild(textBar);
 
 
@@ -108,7 +111,7 @@ function doReset() {
 
 //growL button
 var growL = document.createElement('span');
-growL.innerHTML = 'GROWLEFT ';
+growL.innerHTML = '&larr; ';
 growL.addEventListener('click',doGrowL);
 textBar.appendChild(growL);
 	
@@ -131,7 +134,7 @@ function doGrowL() {
 
 //growUp button
 var growUp = document.createElement('span');
-growUp.innerHTML = 'GROWUP ';
+growUp.innerHTML = '&uarr; ';
 growUp.addEventListener('click',doGrowUp);
 textBar.appendChild(growUp);
 	
@@ -144,13 +147,79 @@ function doGrowUp() {
 	}
 	for (var j = 0; j < matches.length; j++) {
 		try {
-			paperDivs[matches[j]-40].style.backgroundColor = paintbrush;
+			paperDivs[matches[j]-columns].style.backgroundColor = paintbrush;
 		}
 		catch (err) {
 			console.log("fell off the edge! " + err);
 		}
 	}
 }	
+
+//growR button
+var growR = document.createElement('span');
+growR.innerHTML = '&rarr; ';
+growR.addEventListener('click',doGrowR);
+textBar.appendChild(growR);
+
+function doGrowR() {
+	var matches = [];
+	for (var i = 0; i < paperDivs.length; i++) {
+		if (paperDivs[i].style.backgroundColor === paintbrush) {
+			matches.push(i);
+		}
+	}
+	for (var j = 0; j < matches.length; j++) {
+		try {
+			paperDivs[matches[j]+1].style.backgroundColor = paintbrush;
+		}
+		catch (err) {
+			console.log("fell off the edge! " + err);
+		}
+	}
+}
+
+//growDown button
+var growDown = document.createElement('span');
+growDown.innerHTML = '&darr; ';
+growDown.addEventListener('click',doGrowDown);
+textBar.appendChild(growDown);
+
+function doGrowDown() {
+	var matches = [];
+	for (var i = 0; i < paperDivs.length; i++) {
+		if (paperDivs[i].style.backgroundColor === paintbrush) {
+			matches.push(i);
+		}
+	}
+	for (var j = 0; j < matches.length; j++) {
+		try {
+			paperDivs[matches[j]+columns].style.backgroundColor = paintbrush;
+		}
+		catch (err) {
+			console.log("fell off the edge! " + err);
+		}
+	}
+}	
+
+//arrow keys
+window.addEventListener('keydown',checkKeydown,false);
+
+function checkKeydown(e) {
+	switch (e.keyCode) {
+		case 37:
+			doGrowL();
+			break;
+		case 38:
+			doGrowUp();
+			break;
+		case 39:
+			doGrowR();
+			break;
+		case 40:
+			doGrowDown();
+			break;
+	}
+}
 
 //fill button
 var fill = document.createElement('span');
@@ -167,13 +236,33 @@ function doFill() {
 	}
 }
 
-//rectangle maker
-var a = 2;
-var b = 26;
-var positions = [a,b];
+//rectangle maker ONLY WORKS for topleft to bottomright (or reverse rectangles)
+// var columns = 10; //ex
+// var a = 2; //ex
+// var b = 26; //ex
 
-if (b>a) {
+var a;
+function startRect(event) {
+	a = event.target.indexValue;
+}
 
+function endRect(event) {
+	var b = event.target.indexValue;
+	var startR = Math.min(a,b);
+	var endR = Math.max(a,b);
+	var heightR = Math.ceil((endR-startR)/columns);
+	var indexR = [];
+	var widthR = endR - ( startR + ( ( heightR - 1 ) * columns ) );
+	for (var i = 0; i < heightR; i++) {
+		for (var j = 0; j <= widthR; j++) {
+			var indexValue = startR+(i*columns)+j;
+			indexR.push(indexValue);
+		}
+	}
+	for (var k = 0; k < indexR.length; k++) {
+		paperDivs[indexR[k]].style.backgroundColor = paintbrush;
+	}
+	console.log(indexR);
 }
 
 
