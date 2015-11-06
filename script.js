@@ -91,7 +91,7 @@ var textBar = document.createElement('div');
 textBar.style.fontFamily = 'sans-serif';
 textBar.style.fontWeight = 'bold';
 textBar.style.color = 'white';
-//textBar.style.padding = '10px';
+textBar.style.padding = '10px';
 textBar.style.fontSize = "40px";
 textBar.innerHTML = ' ';
 document.body.appendChild(textBar);
@@ -237,9 +237,6 @@ function doFill() {
 }
 
 //rectangle maker ONLY WORKS for topleft to bottomright (or reverse rectangles)
-// var columns = 10; //ex
-// var a = 2; //ex
-// var b = 26; //ex
 
 var a;
 function startRect(event) {
@@ -264,6 +261,3 @@ function endRect(event) {
 	}
 	console.log(indexR);
 }
-
-
-
