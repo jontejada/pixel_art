@@ -19,4 +19,4 @@ Here's the order of steps that I would implement:
 * Add a color picker which allows the user to select any color. Look into the HTML5 color input.
 * Add the ability to click and drag to paint multiple pixels at once
 * Add a paintbucket tool which allows a user to drag a box across the screen and paint all pixels that fall inside that box
-//edit
+//edit2
