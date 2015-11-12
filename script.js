@@ -2,7 +2,7 @@
 document.body.style.margin = '0px';
 var columns = 40;
 var boxSize = window.innerWidth / columns;
-var rows = Math.floor(window.innerHeight / boxSize) - 2;
+var rows = Math.floor(window.innerHeight / boxSize) - 3;
 
 //create, style and append a new pixel (div)
 function makeBox (whatClass,whatColor) {
