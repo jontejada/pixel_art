@@ -114,6 +114,7 @@ function doReset() {
 //growL button
 var growL = document.createElement('span');
 growL.innerHTML = '&larr; ';
+growL.title = 'keyboard arrows work too';
 growL.addEventListener('click',doGrowL);
 textBar.appendChild(growL);
 	
@@ -137,6 +138,7 @@ function doGrowL() {
 //growUp button
 var growUp = document.createElement('span');
 growUp.innerHTML = '&uarr; ';
+growUp.title = 'keyboard arrows work too';
 growUp.addEventListener('click',doGrowUp);
 textBar.appendChild(growUp);
 	
@@ -160,6 +162,7 @@ function doGrowUp() {
 //growR button
 var growR = document.createElement('span');
 growR.innerHTML = '&rarr; ';
+growR.title = 'keyboard arrows work too';
 growR.addEventListener('click',doGrowR);
 textBar.appendChild(growR);
 
@@ -183,7 +186,9 @@ function doGrowR() {
 //growDown button
 var growDown = document.createElement('span');
 growDown.innerHTML = '&darr; ';
+growDown.title = 'keyboard arrows work too';
 growDown.addEventListener('click',doGrowDown);
+//growDown.addEventListener('mouseover',hoverTip);
 textBar.appendChild(growDown);
 
 function doGrowDown() {
@@ -262,3 +267,21 @@ function endRect(event) {
 	}
 	console.log(indexR);
 }
+
+//popup div NOT WORKING
+// function makePopup() {
+// 	var popup = document.createElement('div');
+// 	popup.className = 'over';
+// 	popup.style.backgroundColor = 'rgba(10,10,10,0.6)';
+// 	popup.style.width = '200px';
+// 	popup.style.height = '500px';
+// 	popup.style.position = 'fixed';
+// 	popup.style.padding = '50px';
+// 	// popup.style.zIndex = '-10';
+// 	document.body.appendChild(popup);
+// }
+
+// makePopup();
+
+
+//alert('PIXEL ART Controls\nset color with click\npaint with hover\nclick for small box\nclick and drag for big box(partially working)\ndouble click or press FILL to fill in');
