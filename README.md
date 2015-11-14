@@ -1,3 +1,13 @@
+#Pixel Art Controls
+* Click on color box to make a color selection
+* Painting
+ * Hover to paint a single pixel
+ * Click to paint a 3x3 box
+ * Double click (or click 'FILL') to paint in the background
+ * Use arrow keys (or click ← ↑ → ↓) to directionally expand current color pixels
+* Click 'RESET' to reset the canvas 
+
+
 # Assignment - Pixel Art Maker
 
 Create your own Pixel Art Maker, which lets you click on a grid to "paint" pixel art.  The interface is completely up to you, but it could look something like this:
