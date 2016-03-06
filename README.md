@@ -54,7 +54,6 @@ var colorList = [
 
 for (var i = 0; i < colorList.length; i++) {
 	makeBox('paint',colorList[i]);
-	//makeBox('paint',colorList[i]);
 }
 var pallet = document.getElementsByClassName('paint');
 
@@ -272,7 +271,8 @@ function doFill() {
 }
 ```
 
-##rectangle maker ONLY WORKS for topleft to bottomright (or reverse) rectangles
+##rectangle maker
+ONLY WORKS for topleft to bottomright (or reverse) rectangles
 ```javascript
 var a;
 function startRect(event) {
